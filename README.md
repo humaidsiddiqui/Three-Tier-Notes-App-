@@ -57,7 +57,5 @@ with app.app_context():
 6. Start the Flask App
 Run the Flask application:
 ```bash
-Copy
-Edit
 python app.py
 The app will be running at http://127.0.0.1:5000/.
