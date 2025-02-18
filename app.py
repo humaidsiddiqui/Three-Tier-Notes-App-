@@ -5,10 +5,7 @@ app = Flask(__name__)
 #postgresl database configuration
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:postgres@localhost/notes'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-db = SQLAlchemy()
-# db.init_app(app)
-
+db = SQLAlchemy(app)
 #database model for notes
 class Note(db.Model):
     __tablename__ = 'notes'
@@ -35,6 +32,3 @@ def submit_note():
  
 if __name__ == '__main__':
     app.run(debug=True)
-    with app.app_context():
-        db.create_all()
-        db.session.commit()
