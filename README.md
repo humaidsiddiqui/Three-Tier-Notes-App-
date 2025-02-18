@@ -35,7 +35,7 @@ Create a PostgreSQL database (e.g., notes):
 Copy
 Edit
 psql -U postgres
-CREATE DATABASE notes;
+CREATE DATABASE notes
 ```
 
 3. Install Dependencies
