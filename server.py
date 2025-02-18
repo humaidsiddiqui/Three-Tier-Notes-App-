@@ -1,19 +1,22 @@
 from flask import Flask, render_template, request, redirect, url_for
-from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 
-#postgresl database configuration
+notes = []
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:postgres@localhost/notes'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+@app.route('/')
+def index():
+    return render_template('index.html')
 
-db = SQLAlchemy(app)
+# @app.route('/add', methods=['POST'])
+# def add_note():
+#     note = request.form.get('note')
+#     if note:
+#         notes.append(note)
+#     return redirect(url_for('index'))
 
-#database model for notes
-
-
-
+if __name__ == '__main__':
+    app.run(debug=True)
 
 
 
