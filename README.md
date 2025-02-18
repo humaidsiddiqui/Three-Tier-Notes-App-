@@ -32,8 +32,6 @@ cd notes-
 ##2. Set Up a PostgreSQL Database
 Create a PostgreSQL database (e.g., notes):
 ```bash
-Copy
-Edit
 psql -U postgres
 CREATE DATABASE notes
 ```
@@ -41,30 +39,23 @@ CREATE DATABASE notes
 3. Install Dependencies
 Install the required Python packages:
 ```bash
-Copy
-Edit
 pip install -r requirements.txt
 ```
 4. Update Database URI
 In app.py, update the SQLALCHEMY_DATABASE_URI to match your PostgreSQL setup:
 ```bash
-python
-Copy
-Edit
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://username:password@localhost/notes'
 ```
 5. Create Database Tables
 Run the following commands to create the necessary tables:
 ```bash
-Copy
-Edit
 python
 from app import db
-db.create_all()
+with app.app_context():
+...db.create_all()
 ```
 6. Start the Flask App
 Run the Flask application:
-
 ```bash
 Copy
 Edit
