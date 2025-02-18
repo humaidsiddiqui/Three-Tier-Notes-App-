@@ -17,9 +17,8 @@ class Note(db.Model):
         self.content = content
 @app.route('/')
 def index():
-    # notes = Note.query.all()
     return render_template('index.html')
-@app.route('/submit', methods=['POST'])
+@app.route('/add-notec', methods=['POST'])
 def submit_note():
     if request.method == 'POST':
         title = request.form.get('title')
@@ -29,8 +28,10 @@ def submit_note():
             db.session.add(note)
             db.session.commit()
         return redirect(url_for('index'))
+    
+    print('added note')
  
 if __name__ == '__main__':
     app.run(debug=True)
-    with app.app_context():
-        db.create_all()
+    # with app.app_context():
+    #     db.create_all()
