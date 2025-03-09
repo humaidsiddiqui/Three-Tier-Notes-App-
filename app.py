@@ -37,12 +37,7 @@ def submit_note():
         db.session.rollback()
         print(f"Database error: {e}")
         return jsonify({'error': str(e)}), 500
-
-    # @app.route('/delete/<init:id>',methods=['POST'])
-    # def delete_record():
-    #     db.session(id)
-    #     db.session.commit()
-    #     return redirect(url_for('index'))    
+   
 @app.route("/delete-note", methods=['POST'])
 def delete_record():
     data = request.get_json()
