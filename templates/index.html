@@ -14,15 +14,9 @@
             <input type="text" placeholder="Note Title" id="note-title">
             <textarea placeholder="Note Content" id="note-content"></textarea>
             <button type="submit" name="submitbtn" onclick="addNote()">Add Note</button>
-
-                
-
-
-
-
-
-
-
+            <button type="submit" name="deletebtn" onclick="deleteNote()">
+                <img src = "{{ url_for('static', filename='garbage.png') }}" alt="Delete" style="width:20px;height:20px;">
+            </button>
         </div>
         <div id="notes-container"></div>
     </div>
@@ -46,8 +40,29 @@
                 document.getElementById('notes-container').appendChild(note);
                 document.getElementById('note-title').value = '';
                 document.getElementById('note-content').value = '';
+                
             }
         }
+    </script>
+    <script>
+        function deleteNote(button, title, content) {
+    fetch('/delete-note', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ title, content })
+    })
+    .then(response => response.json()) // Convert response to JSON
+    .then(data => {
+        if (data.success) {
+            button.parentElement.remove(); // Remove note from UI
+        } else {
+            alert('Error: ' + (data.error || 'Could not delete note.'));
+        }
+    })
+    .catch(error => console.error('Error:', error));
+}
     </script>
 </body>
 </html>

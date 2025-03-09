@@ -8,16 +8,9 @@ notes = []
 def index():
     return render_template('index.html')
 
-# @app.route('/add', methods=['POST'])
-# def add_note():
-#     note = request.form.get('note')
-#     if note:
-#         notes.append(note)
-#     return redirect(url_for('index'))
-
 if __name__ == '__main__':
-    app.run(debug=True)
-
+    print("running main")
+    app.run(host="127.0.0.1", port=5000) 
 
 
 

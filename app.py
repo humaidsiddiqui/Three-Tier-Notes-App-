@@ -26,7 +26,7 @@ def submit_note():
         title = data['title']
         content = data['content']
 
-        print(f"🔍 Received data: title={title}, content={content}")  # Debugging
+        print(f"Received data: title={title}, content={content}")  # Debugging
 
         note = Note(title=title, content=content)
         db.session.add(note)
@@ -38,5 +38,27 @@ def submit_note():
         print(f"Database error: {e}")
         return jsonify({'error': str(e)}), 500
 
+    # @app.route('/delete/<init:id>',methods=['POST'])
+    # def delete_record():
+    #     db.session(id)
+    #     db.session.commit()
+    #     return redirect(url_for('index'))    
+@app.route("/delete-note", methods=['POST'])
+def delete_record():
+    data = request.get_json()
+    title = data.get('title')
+    content = data.get('content')
+
+    note = Note.query.filter_by(title=title, content=content).first()
+    if note:
+        db.session.delete(note)
+        db.session.commit()
+        return jsonify({"success": True}), 200
+    return jsonify({"error": "Note not found"}), 404
+def delete():
+    return render_template('index.html')
+    
+
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="127.0.0.1",port=5000) 
